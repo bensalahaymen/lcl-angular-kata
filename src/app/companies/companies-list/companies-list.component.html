@@ -1,0 +1,38 @@
+<app-page-title title="Companies List"></app-page-title>
+
+<button type="button" class="btn btn-outline-success float-end mt-3 me-3" title="Create new company" (click)="createNewCompany()">Create Company
+</button>
+
+<div *ngIf="!isListEmpty; else noCompanyBlock">
+  <table class="table ms-2">
+    <tr>
+      <th>Company Name</th>
+      <th>Number of Employees</th>
+      <th>Revenues ($millions)</th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let company of importCompanies">
+      <td>{{company?.companyName}}</td>
+      <td>{{company?.employeesNumber}}</td>
+      <td>{{formatNumber(company?.revenues)}}</td>
+      <td>
+        <button type="button" title="Delete company" class="btn btn-outline-danger" (click)="openDeleteCompanyModal(company)">Delete</button>
+      </td>
+    </tr>
+  </table>
+
+</div>
+<ng-template #noCompanyBlock>
+  <app-no-data [message]="'No Data To Display'">
+  </app-no-data>
+</ng-template>
+
+<div class="col-md-4 ms-5">
+  <label for="importExcel" class="form-label">Import data from excel file:</label>
+  <input #inputFile class="form-control" id="importExcel" type="file" (change)="onFileChange($event)"
+         accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" multiple="false">
+</div>
+<app-form-feedback
+  *ngIf="importExelFile.get('excelFileName').errors?.requiredFileType"
+  message="File must be in xlsx format">
+</app-form-feedback>

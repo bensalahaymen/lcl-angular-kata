@@ -1,0 +1,84 @@
+<app-page-title title="Company Creation"></app-page-title>
+
+
+<form [formGroup]="createCompanyForm" (ngSubmit)="createCompanyFormSubmit()">
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card shadow-sm ms-2">
+        <div class="card-body">
+          <div class="col-md-4 mb-2">
+            <label for="companyName">Company Name <span
+              class="text-warning">*</span></label>
+            <input type="text" class="form-control" id="companyName" formControlName="companyName">
+            <app-form-feedback
+              *ngIf="createCompanyForm.get('companyName').errors?.required && (createCompanyForm.get('companyName').dirty || createCompanyForm.get('companyName').touched)"
+              message="This field is required">
+            </app-form-feedback>
+            <app-form-feedback
+              *ngIf="createCompanyForm.get('companyName').errors?.pattern && (createCompanyForm.get('companyName').dirty || createCompanyForm.get('companyName').touched)"
+              message="This field may contain only letters, numbers, spaces, dash, dot and apostrophe">
+            </app-form-feedback>
+            <app-form-feedback
+              *ngIf="createCompanyForm.get('companyName').errors?.maxlength  && (createCompanyForm.get('companyName').dirty || createCompanyForm.get('companyName').touched)"
+              message="This field accepts a maximum length of 20 characters">
+            </app-form-feedback>
+          </div>
+
+          <div class="col-md-4 mb-2">
+            <label for="employeesNumber">Employees Number <span
+              class="text-warning">*</span></label>
+            <input class="form-control"
+                   id="employeesNumber"
+                   type="text" name="employeesNumber" formControlName="employeesNumber">
+            <app-form-feedback
+              *ngIf="createCompanyForm.get('employeesNumber').errors?.required && (createCompanyForm.get('employeesNumber').dirty || createCompanyForm.get('employeesNumber').touched)"
+              message="This field is required">
+            </app-form-feedback>
+            <app-form-feedback
+              *ngIf="createCompanyForm.get('employeesNumber').errors?.pattern && (createCompanyForm.get('employeesNumber').dirty || createCompanyForm.get('employeesNumber').touched)"
+              message="This field may contain only numbers">
+            </app-form-feedback>
+            <app-form-feedback
+              *ngIf="createCompanyForm.get('employeesNumber').errors?.maxlength  && (createCompanyForm.get('employeesNumber').dirty || createCompanyForm.get('employeesNumber').touched)"
+              message="This field accepts a maximum length of 10 characters">
+            </app-form-feedback>
+          </div>
+
+          <div class="col-md-4 mb-2">
+            <label for="revenues">Revenues <span
+              class="text-warning">*</span></label>
+            <input class="form-control" id="revenues" type="text" name="revenues" formControlName="revenues">
+            <app-form-feedback
+              *ngIf="createCompanyForm.get('revenues').errors?.required && (createCompanyForm.get('revenues').dirty || createCompanyForm.get('revenues').touched)"
+              message="This field is required">
+            </app-form-feedback>
+            <app-form-feedback
+              *ngIf="createCompanyForm.get('revenues').errors?.pattern && (createCompanyForm.get('revenues').dirty || createCompanyForm.get('revenues').touched)"
+              message="This field may contain only numbers">
+            </app-form-feedback>
+            <app-form-feedback
+              *ngIf="createCompanyForm.get('revenues').errors?.maxlength  && (createCompanyForm.get('revenues').dirty || createCompanyForm.get('revenues').touched)"
+              message="This field accepts a maximum length of 8 characters">
+            </app-form-feedback>
+          </div>
+
+          <button type="submit" class="btn btn-success float-end ms-2" title="Add company"
+                  [disabled]="!createCompanyForm.valid">
+            Submit
+          </button>
+
+          <button class="btn btn-danger float-end" type="button" title="Reset company" (click)="resetCompanyForm()">
+            Cancel
+          </button>&nbsp;
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</form>
+<a class="btn btn-link  mb-2" [routerLink]="['/companies']">
+  Back to companies list
+</a>
+
